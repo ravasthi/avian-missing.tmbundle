@@ -5,20 +5,18 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>#!/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby -wKU
-
-path = File.join(ENV['TM_PROJECT_DIRECTORY'], '.tm_properties')
-system 'touch', path
-system 'open', "txmt://open?url=file://#{path}"
-</string>
+	<string>#!/usr/bin/env bash
+(test `defaults read com.macromates.TextMate.preview hideStatusBar 2&gt; /dev/null` == 1) &amp;&amp;
+  (defaults write com.macromates.TextMate.preview hideStatusBar -bool NO &amp;&amp; echo 'visible.') || 
+  (defaults write com.macromates.TextMate.preview hideStatusBar -bool YES &amp;&amp; echo 'hidden.')
+  
+osascript -e "tell application \"$(basename "$TM_APP_PATH")\" to activate"</string>
 	<key>input</key>
 	<string>none</string>
 	<key>inputFormat</key>
 	<string>text</string>
-	<key>keyEquivalent</key>
-	<string>^~@,</string>
 	<key>name</key>
-	<string>Open prject .tm_properties</string>
+	<string>Toggle Status Bar</string>
 	<key>outputCaret</key>
 	<string>afterOutput</string>
 	<key>outputFormat</key>
@@ -26,7 +24,7 @@ system 'open', "txmt://open?url=file://#{path}"
 	<key>outputLocation</key>
 	<string>toolTip</string>
 	<key>uuid</key>
-	<string>2FB5FB79-4B89-48AF-84FE-9832F905C439</string>
+	<string>3CFDE182-FB93-447F-9AA8-5A84D75E103E</string>
 	<key>version</key>
 	<integer>2</integer>
 </dict>

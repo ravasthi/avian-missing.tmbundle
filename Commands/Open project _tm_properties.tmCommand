@@ -5,18 +5,27 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>#!/usr/bin/env bash
+	<string>#!/usr/bin/env ruby18 -wKU
 
-open "$TM_PROJECT_DIRECTORY" -a "${TM_TERMINAL_APP:-Terminal.app}"
+project_dir = ENV['TM_PROJECT_DIRECTORY']
+
+unless project_dir
+  puts "Not in a project!"
+  exit
+end
+
+path = File.join(project_dir, '.tm_properties')
+system 'touch', path
+system 'open', "txmt://open?url=file://#{path}"
 </string>
 	<key>input</key>
 	<string>none</string>
 	<key>inputFormat</key>
 	<string>text</string>
 	<key>keyEquivalent</key>
-	<string>^~@t</string>
+	<string>^~@,</string>
 	<key>name</key>
-	<string>Open Project in Terminal</string>
+	<string>Open project .tm_properties</string>
 	<key>outputCaret</key>
 	<string>afterOutput</string>
 	<key>outputFormat</key>
@@ -24,7 +33,7 @@ open "$TM_PROJECT_DIRECTORY" -a "${TM_TERMINAL_APP:-Terminal.app}"
 	<key>outputLocation</key>
 	<string>toolTip</string>
 	<key>uuid</key>
-	<string>F2C95C06-3A20-41DF-A192-AF59906E20D3</string>
+	<string>2FB5FB79-4B89-48AF-84FE-9832F905C439</string>
 	<key>version</key>
 	<integer>2</integer>
 </dict>

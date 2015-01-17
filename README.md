@@ -1,9 +1,26 @@
 # Avian Missing
 
+## Installation
+
+```bash
+gem install tmbundle-manager --pre # sudo might be needed
+tmb install elia/avian-missing
+```
+
+### Update
+
+```bash
+tmb update avian-missing
+```
+
+
+
+## Usage
+
 This is a collection of missing features from [TextMate 2.0 Alpha](http://blog.macromates.com/2011/textmate-2-0-alpha/).
 This bundle includes:
 
-## <kbd>⌃⌘S</kbd> Save Project 
+### <kbd>⌃⌘S</kbd> Save Project
 
 The save project command will now create a `.tm_properties` in the current file browser folder
 precompiled with `projectDirectory` set and an example `windowTitle` featuring the
@@ -17,48 +34,28 @@ current scm-branch and the `$projectDirectory` basename
 This command also saves the project in the favorities (accessible with `⌘⇧O`).
 
 
-## <kbd>⎋</kbd> Character class indifferent completion
+### <kbd>⎋</kbd> Character class indifferent completion
 
 TextMate 2 [introduced](http://blog.macromates.com/2012/clever-completion/) strict …err …clever completion, which will not cross boundaries between character classes anymore. For example in Ruby typing `au` and hitting `⎋` for autocompletion will not pick `:auto` or `@autocomplete` since they have a leading `:` and `@` and the belong to the *symbol* and *instance variable* character classes.
 
 This bundle reintroduces the TM1 behavior.
 
 
-## <kbd>⌃⎋</kbd> Cross tab completion
+### <kbd>⌃⎋</kbd> Cross tab completion
 
 [RubyAMP](http://code.leadmediapartners.com/) used to have this.
 
 
-## <kbd>⌃⌘N</kbd> New File
-
-This command creates a new file in the current folder and presents a save dialog right away as in TM1 instead of opening the [dreadful](http://tm2tips.tumblr.com/post/16467488354/create-a-new-file-in-a-project-folder) TM2 *untitled* tab. The command is accessible also by control-clicking on the file browser.
-
-### Requirements
-
-You need to **Enable access for assistive devices** in order to make it work:
-
-- Open your **System Preferences**
-- [Open **Accessibility**](https://f.cloud.github.com/assets/1051/120814/4f8e36a8-6d3d-11e2-9803-d7e4f9c379d9.png)
-- [Tick **Enable access for assistive devices**](https://f.cloud.github.com/assets/1051/120815/51f67d6a-6d3d-11e2-8b9a-7e983459ea55.png)
-
-### Caveats
-
-- Don't hold your ⌘ or ⌃ because they can trigger other actions while the bundle is typing the current filename in the dialog_
-- Some users are reporting a missing `TM_SUPPORT_PATH` variable, 
-  if it's the case try adding to your global `.tm_properties` (or to _Preferences→Variables_ if you prefer):
-
-      TM_SUPPORT_PATH = "~/Library/Application Support/TextMate/Managed/Bundles/Bundle Support.tmbundle/Support/shared"
-
-
-
-## <kbd>⌃⌥⌘T</kbd> Open Project directory in Terminal
+### <kbd>⌃⌥⌘T</kbd> Open Project directory in terminal
 
 _NOTE: requires OSX Lion_
 
 Opens the current project directory in the terminal (not really present in TM1, but useful anyway).
+ 
+By default will open Terminal, if you prefer anoter terminal app you can set in `.tm_properties` a variable: `TM_TERMINAL_APP = "iTerm.app"`
 
 
-## <kbd>⌃⌥⌘L</kbd> Keep current file as reference
+### <kbd>⌃⌥⌘L</kbd> Keep current file as reference
 
 > …waiting for split panes
 
@@ -67,28 +64,40 @@ Outputs the current source into the bottom html pane, this makes the current fil
 Seems that most of the need for split panes is to keep one file as a reference, this solves this particular issue.
 
 
-## <kbd>⌥⌘,</kbd> Open the global `.tm_properties` with
+### <kbd>⌥⌘,</kbd> Open the global `.tm_properties`
+
 Tired of opening `.tm_properties` from the terminal or browsing to it by hand?
 
-Now you can just hit `⌥⌘,` and bring up your alternative preferencies (from you the home folder).
+Now you can just hit `⌥⌘,` and bring up your alternative preferences (from you the home folder).
 
 
+### <kbd>⌃⌥⌘,</kbd> Open the project `.tm_properties`
 
-## <kbd>⌘S</kbd> Strip trailing whitespace on save
+Now you can just hit `⌃⌥⌘,` and bring up your alternative preferences (from the current project).
+
+
+### <kbd>⌘S</kbd> Strip trailing whitespace on save
 
 Just add `TM_STRIP_WHITESPACE_ON_SAVE = true` to your `.tm_properties`.
 Ending newline fix is included.
 
+**BEWARE:** The command **strips whitespace before writing to disk but not in the editor window**, this is a feature to me
+but I understand that some users would prefer to have the editor updated. If you're of that kind you'll have to modify the bundle manually
+and replace `callback.document.export` with `callback.document.will-save`
+([screenshot](http://cl.ly/image/0r2s3s3v3d0t/Screen%20Shot%202014-07-21%20at%2001.44.46.png)).
+
+
+### <del><kbd>⌃⌘N</kbd> New File</del> → <kbd>⇧⌘N</kbd> (builtin)
+
+Removed as <kbd>⇧⌘N</kbd> has been introduced as a builtin command.
+
+### <kbd>⌥⏎</kbd> Insert new line above
+
+This is like `O` (vs. `o` which is <kbd>⌘⏎</kbd>) in `vim`.
+
+
 
 <br><br>
-
-## Installation
-
-```bash
-mkdir -p ~/Library/Application\ Support/Avian/Bundles
-cd ~/Library/Application\ Support/Avian/Bundles
-git clone git://github.com/elia/avian-missing.tmbundle.git
-```
 
 
 ## Contributing
